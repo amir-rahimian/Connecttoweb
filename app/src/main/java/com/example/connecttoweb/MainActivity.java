@@ -1,0 +1,183 @@
+package com.example.connecttoweb;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private TextView txt ;
+    private EditText edtUrl , edtKey1,edtKey2,edtVal1,edtVal2;
+    private Button btnGet;
+    private ImageView khaby ;
+
+    private boolean close = false ;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txt = findViewById(R.id.txt);
+        khaby = findViewById(R.id.KhabyImg);
+        edtUrl = findViewById(R.id.edtUrl);
+        edtKey1 = findViewById(R.id.edtK1);
+        edtKey2 = findViewById(R.id.edtK2);
+        edtVal1 = findViewById(R.id.edtV1);
+        edtVal2 = findViewById(R.id.edtV2);
+        btnGet = findViewById(R.id.btnGet);
+        btnGet.setOnClickListener(this);
+
+
+        edtKey1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edtVal1.setHint(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        edtKey2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                edtVal2.setHint(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        hidekeyboard(MainActivity.this);
+
+       String url = getFullUrlFrom(new Request(edtKey1.getText().toString(),edtVal1.getText().toString())
+               ,new Request(edtKey2.getText().toString(),edtVal2.getText().toString()));
+
+        new RequestTask().execute(url);
+
+
+    }
+
+    private void hidekeyboard(Context context) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(edtUrl.getWindowToken(), 0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        hidekeyboard(MainActivity.this);
+        if (close) {
+            super.onBackPressed();
+        }else {
+            close = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    close=false;
+                }
+            },500);
+        }
+    }
+
+    private String getFullUrlFrom (Request... requests){
+
+        StringBuilder stringBuilder = new StringBuilder(edtUrl.getText().toString());
+        stringBuilder.append("?");
+        for (Request r :
+                requests) {
+            stringBuilder.append(r.getKay());
+            stringBuilder.append("=");
+            stringBuilder.append(r.getVal());
+            stringBuilder.append("&");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.toString().length()-1);
+
+
+        return stringBuilder.toString();
+    }
+
+    class RequestTask extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(String... uri) {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpResponse response;
+            String responseString = null;
+            try {
+                response = httpclient.execute(new HttpGet(uri[0]));
+                StatusLine statusLine = response.getStatusLine();
+                if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    response.getEntity().writeTo(out);
+                    responseString = out.toString();
+                    out.close();
+                } else {
+                    //Closes the connection.
+                    response.getEntity().getContent().close();
+                    throw new IOException(statusLine.getReasonPhrase());
+                }
+            } catch (ClientProtocolException e) {
+                //TODO Handle problems..
+            } catch (IOException e) {
+                //TODO Handle problems..
+            }
+            return responseString;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            //Do anything with response..
+            txt.setText(result);
+
+            khaby.animate().alpha(1).translationY(0).setDuration(200);
+            txt.animate().translationY(0).setDuration(500);
+        }
+    }
+}
