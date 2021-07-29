@@ -639,6 +639,21 @@
             ]
         },
         {
+            "outputFile": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\values-w360dp-port-v13_values-w360dp-port-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Rahimian\\.gradle\\caches\\transforms-2\\files-2.1\\10046aad9e73cbf22653afacdcab8838\\material-1.4.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,170,226,293,358,413,478",
+                        "endColumns": "58,55,55,66,64,54,64,68",
+                        "endOffsets": "109,165,221,288,353,408,473,542"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\values-sw600dp-v13_values-sw600dp-v13.arsc.flat",
             "map": [
                 {
@@ -668,21 +683,6 @@
                         "endLines": "10,11,12,13,14,15,17,18,19,20,21,25",
                         "endColumns": "59,69,70,71,57,57,10,63,55,58,62,10",
                         "endOffsets": "666,736,807,879,937,995,1104,1168,1224,1283,1346,1518"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\values-w360dp-port-v13_values-w360dp-port-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\Rahimian\\.gradle\\caches\\transforms-2\\files-2.1\\10046aad9e73cbf22653afacdcab8838\\material-1.4.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,114,170,226,293,358,413,478",
-                        "endColumns": "58,55,55,66,64,54,64,68",
-                        "endOffsets": "109,165,221,288,353,408,473,542"
                     }
                 }
             ]

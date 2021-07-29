@@ -7,6 +7,22 @@
     tools:context=".MainActivity">
 
     <EditText
+        android:id="@+id/edtUrlImg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Image Url"
+        android:inputType="textPersonName"
+        android:text="https://wallpapercave.com/wp/wp9464214.png"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/edtUrl" />
+
+    <EditText
         android:id="@+id/edtK2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,7 +67,7 @@
         android:ems="10"
         android:hint="Url"
         android:inputType="textPersonName"
-        android:text="https://bsite.net/myandroidteam/mohammad.aspx"
+        android:text="https://bsite.net/myandroidteam/amir.aspx"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +85,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/edtUrlImg" />
 
     <EditText
         android:id="@+id/edtV1"
@@ -89,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/edtK1"
-        app:layout_constraintTop_toBottomOf="@+id/edtUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/edtUrlImg" />
 
     <Button
         android:id="@+id/btnGet"
@@ -110,11 +126,11 @@
         android:alpha="0"
         android:translationY="100dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnGet"
-        app:srcCompat="@mipmap/khaby" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/txt"
@@ -125,6 +141,7 @@
         android:layout_marginBottom="24dp"
         android:background="#EBFFFFFF"
         android:fontFamily="sans-serif-medium"
+        android:gravity="center"
         android:padding="16dp"
         android:text="TextView"
         android:textSize="20sp"
@@ -140,5 +157,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.35" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="image"
+        app:layout_constraintBottom_toBottomOf="@+id/edtUrlImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edtUrlImg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

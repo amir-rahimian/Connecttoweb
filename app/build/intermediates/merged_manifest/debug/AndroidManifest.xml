@@ -20,6 +20,8 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.ConnectToWeb" >
+        <activity android:name="com.example.connecttoweb.ReverseAvititty" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

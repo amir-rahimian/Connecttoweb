@@ -24,6 +24,10 @@
         "source": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_reverse_avititty.xml.flat",
+        "source": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\src\\main\\res\\layout\\activity_reverse_avititty.xml"
+    },
+    {
         "merged": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
@@ -34,10 +38,6 @@
     {
         "merged": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_khaby.png.flat",
-        "source": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\src\\main\\res\\mipmap-hdpi\\khaby.png"
     },
     {
         "merged": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
@@ -66,5 +66,9 @@
     {
         "merged": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\build\\intermediates\\res\\merged\\debug\\menu_main_menu.xml.flat",
+        "source": "C:\\Users\\Rahimian\\StudioProjects\\Connecttoweb\\app\\src\\main\\res\\menu\\main_menu.xml"
     }
 ]

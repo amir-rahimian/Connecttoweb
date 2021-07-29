@@ -1,20 +1,28 @@
 package com.example.connecttoweb;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -26,11 +34,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView txt ;
-    private EditText edtUrl , edtKey1,edtKey2,edtVal1,edtVal2;
+    private EditText edtUrl , edtimageurl , edtKey1,edtKey2,edtVal1,edtVal2;
     private Button btnGet;
     private ImageView khaby ;
 
@@ -48,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         edtKey2 = findViewById(R.id.edtK2);
         edtVal1 = findViewById(R.id.edtV1);
         edtVal2 = findViewById(R.id.edtV2);
+        edtimageurl = findViewById(R.id.edtUrlImg);
         btnGet = findViewById(R.id.btnGet);
         btnGet.setOnClickListener(this);
 
@@ -93,8 +104,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         hidekeyboard(MainActivity.this);
 
-       String url = getFullUrlFrom(new Request(edtKey1.getText().toString(),edtVal1.getText().toString())
+       String url = Request.getFullUrlFrom(edtUrl.getText().toString(),new Request(edtKey1.getText().toString(),edtVal1.getText().toString())
                ,new Request(edtKey2.getText().toString(),edtVal2.getText().toString()));
+
+        new GetImages(edtimageurl.getText().toString()).execute(khaby);
 
         new RequestTask().execute(url);
 
@@ -122,22 +135,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private String getFullUrlFrom (Request... requests){
-
-        StringBuilder stringBuilder = new StringBuilder(edtUrl.getText().toString());
-        stringBuilder.append("?");
-        for (Request r :
-                requests) {
-            stringBuilder.append(r.getKay());
-            stringBuilder.append("=");
-            stringBuilder.append(r.getVal());
-            stringBuilder.append("&");
-        }
-        stringBuilder.deleteCharAt(stringBuilder.toString().length()-1);
-
-
-        return stringBuilder.toString();
-    }
 
     class RequestTask extends AsyncTask<String, String, String> {
         @Override
@@ -179,5 +176,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             khaby.animate().alpha(1).translationY(0).setDuration(200);
             txt.animate().translationY(0).setDuration(500);
         }
+    }
+
+    private class GetImages extends AsyncTask<Object, Object, Object> {
+        private String requestUrl;
+        private ImageView view;
+        private GetImages(String requestUrl) {
+            this.requestUrl = requestUrl;
+        }
+
+        @Override
+        protected Object doInBackground(Object... objects) {
+            view = (ImageView ) objects[0];
+            try {
+                URL url = new URL(requestUrl);
+                URLConnection conn = url.openConnection();
+                return BitmapFactory.decodeStream(conn.getInputStream());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return null;
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            if (o == null) {
+                Toast.makeText(MainActivity.this,"something went wrong!",Toast.LENGTH_SHORT).show();
+            } else {
+                view.setImageBitmap((Bitmap) o);
+            }
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        startActivity(new Intent(MainActivity.this,ReverseAvititty.class));
+        return super.onOptionsItemSelected(item);
     }
 }

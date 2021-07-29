@@ -17,4 +17,25 @@ public class Request {
     public String getVal() {
         return val;
     }
+
+    @Override
+    public String toString (){
+     return this.kay+"="+this.val;
+    }
+
+
+    public static String getFullUrlFrom (String url ,Request... requests){
+
+        StringBuilder stringBuilder = new StringBuilder(url);
+        stringBuilder.append("?");
+        for (Request r :
+                requests) {
+            stringBuilder.append(r.toString());
+            stringBuilder.append("&");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.toString().length()-1);
+
+
+        return stringBuilder.toString();
+    }
 }
